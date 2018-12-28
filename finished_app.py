@@ -5,17 +5,11 @@ from flask import render_template, request
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 from sklearn.externals import joblib
-import os
-
+L1_logistic = joblib.load('model/model.pkl')
 # create the flask object
 app = Flask(__name__)
-L1_logistic = joblib.load('model.pkl')
-
-@app.route('/')
-def home():
-    return 'Hello World!'
 
 @app.route('/titanic', methods=['GET','POST'])
 def titanic():
@@ -47,4 +41,6 @@ def titanic():
 
 
 if __name__ == '__main__':
-    app.run(port = 5000,debug=True)
+
+    # start the app
+    app.run(debug=True)
